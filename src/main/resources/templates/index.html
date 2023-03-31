@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}" />
+    <style>
+        .card-title, .card-text {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body class="bg-dark">
+<!-- Navbar -->
+<nav class="navbar navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white" href="#">Milkstgo</a>
+    </div>
+</nav>
+<!-- Main content -->
+<div class="container-fluid mt-5">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-6 col-lg-4">
+            <a th:href="@{/proveedores/agregar}">
+                <div class="card">
+                    <div class="card-body ">
+                        <h5 class="card-title text-decoration-none">Agregar proveedor</h5>
+                        <p class="card-text text-decoration-none">Haz clic aquí para agregar un nuevo proveedor.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <a th:href="@{/proveedores/listar}">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-decoration-none">Listas proveedores</h5>
+                        <p class="card-text text-decoration-none">Haz clic aquí para ver la lista de proveedores.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap JS -->
+<script th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.min.js}"></script>
+</body>
+</html>
