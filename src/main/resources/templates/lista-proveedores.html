@@ -1,61 +1,57 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
   <meta charset="UTF-8">
   <title>Lista de Proveedores</title>
-  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}">
-  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap-dark.min.css}">
-  <style>
-    body {
-      padding-top: 4.5rem;
-    }
-  </style>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}" />
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 </head>
-
-<body class="bg-dark">
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">Inicio</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto">
-      </ul>
+<body>
+<!-- Encabezado -->
+<header class="bg-primary text-white py-3">
+  <div class="container ">
+    <div class="row">
+      <div class="col-1" style="margin-left: -95px">
+        <a href="/" class="text-dark"><i class="bi bi-arrow-left" style="font-size: xx-large"></i></a>
+      </div>
+      <h1 class="col-2 mb-0">Milkstgo</h1>
+      <p class="lead">Administra tus proveedores y acopios de manera eficiente</p>
     </div>
   </div>
-</nav>
-<div class="container mt-3">
+</header>
+<!-- Contenido principal -->
+<div class="container py-5">
   <div class="row">
-    <div class="col-1">
-      <a href="/" class="text-light"><i class="bi bi-arrow-left"></i></a>
-    </div>
     <div class="col-11">
-      <h1 class="text-light">Lista de Proveedores</h1>
+      <h1 class="text-dark">Lista de Proveedores</h1>
     </div>
   </div>
-  <table class="table table-dark">
-    <thead>
-    <tr>
-      <th>Código</th>
-      <th>Nombre</th>
-      <th>Categoría</th>
-      <th>Afecto a Retención</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="proveedor : ${proveedores}">
-      <td th:text="${proveedor.codigo}"></td>
-      <td th:text="${proveedor.nombre}"></td>
-      <td th:text="${proveedor.categoria}"></td>
-      <td th:text="${proveedor.afectoARetencion}"></td>
-    </tr>
-    </tbody>
-  </table>
+  <div class="table-responsive shadow-lg my-3">
+    <table class="table table-striped table-hover table-sm">
+      <thead class="bg-primary text-white">
+      <tr>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Categoría</th>
+        <th>Afecto a Retención</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="proveedorEntity : ${proveedores}">
+        <td th:text="${proveedorEntity.codigo}"></td>
+        <td th:text="${proveedorEntity.nombre}"></td>
+        <td th:text="${proveedorEntity.categoria}"></td>
+        <td th:text="${proveedorEntity.afectoARetencion}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
+
+<!-- Bootstrap JavaScript -->
 <script th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.bundle.min.js}"></script>
 </body>
-
 </html>
+

@@ -1,49 +1,83 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="utf-8">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}" />
-    <style>
-        .card-title, .card-text {
-            text-decoration: none;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
 </head>
-<body class="bg-dark">
-<!-- Navbar -->
-<nav class="navbar navbar-dark bg-primary">
-    <div class="container-fluid">
-        <a class="navbar-brand text-white" href="#">Milkstgo</a>
+<body>
+<!-- Encabezado -->
+<header class="bg-primary text-white py-3">
+    <div class="container">
+        <h1 class="mb-0">Milkstgo</h1>
+        <p class="lead">Administra tus proveedores y acopios de manera eficiente</p>
     </div>
-</nav>
-<!-- Main content -->
-<div class="container-fluid mt-5">
-    <div class="row justify-content-center align-items-center">
-        <div class="col-md-6 col-lg-4">
+</header>
+<!-- Contenido principal -->
+<div class="container py-5">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+        <div class="col">
             <a th:href="@{/proveedores/agregar}">
                 <div class="card">
-                    <div class="card-body ">
-                        <h5 class="card-title text-decoration-none">Agregar proveedor</h5>
-                        <p class="card-text text-decoration-none">Haz clic aquí para agregar un nuevo proveedor.</p>
+                    <div class="card-body card-height">
+                        <h5 class="card-title">Agregar proveedor</h5>
+                        <p class="card-text">Agrega un nuevo proveedor a tu lista de proveedores.</p>
+                        <i class="bi bi-person-plus-fill"></i>
                     </div>
                 </div>
             </a>
         </div>
-        <div class="col-md-6 col-lg-4">
+        <div class="col">
             <a th:href="@{/proveedores/listar}">
                 <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title text-decoration-none">Listas proveedores</h5>
-                        <p class="card-text text-decoration-none">Haz clic aquí para ver la lista de proveedores.</p>
+                    <div class="card-body card-height">
+                        <h5 class="card-title">Listar proveedores</h5>
+                        <p class="card-text">Ve la lista de tus proveedores y su información.</p>
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a th:href="@{/acopio/excel}">
+                <div class="card">
+                    <div class="card-body card-height">
+                        <h5 class="card-title">Importar acopios</h5>
+                        <p class="card-text">Importa tus acopios desde un archivo Excel para una mejor gestión de
+                            datos.</p>
+                        <i class="bi bi-file-earmark-arrow-up-fill"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a th:href="@{/valores-acopio/excel}">
+                <div class="card">
+                    <div class="card-body card-height">
+                        <h5 class="card-title">Importar valores</h5>
+                        <p class="card-text mb-0">Importa valores de grasa y sólidos desde un archivo Excel para una mejor
+                            precisión en tus registros.</p>
+                        <i class="bi bi-percent"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a th:href="@{/}">
+                <div class="card">
+                    <div class="card-body card-height">
+                        <h5 class="card-title">Generar pagos</h5>
+                        <p class="card-text">Genera un reporte y planilla de pagos detallados para tus proveedores.</p>
+                        <i class="bi bi-table"></i>
                     </div>
                 </div>
             </a>
         </div>
     </div>
 </div>
-<!-- Bootstrap JS -->
-<script th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.min.js}"></script>
 </body>
 </html>

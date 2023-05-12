@@ -1,0 +1,9 @@
+*{
+    text-decoration: none !important;
+}
+.card-body {
+    height: 200px; /* establecer la altura deseada */
+}
+.bi{
+    font-size: xx-large;
+}

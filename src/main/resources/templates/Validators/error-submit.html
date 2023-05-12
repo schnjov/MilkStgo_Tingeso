@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+</body>
+<!-- Script para mostar un sweet alert de error -->
+<script>
+    window.onload = () => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error al subir los datos',
+            text: 'Hubo un problema al subir los datos. Por favor, inténtalo de nuevo más tarde.\n' +
+                'Serás redirigido a la página principal.',
+            confirmButtonText: 'OK'
+        });
+        setTimeout(() => {
+            window.location.href = "/";
+        }, 4000);
+    }
+</script>
+</html>
