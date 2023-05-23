@@ -33,4 +33,9 @@ public class ProveedorService {
     public ProveedorEntity findByCodigo(String proveedorCodigo) {
         return proveedorRepository.findByCodigo(proveedorCodigo);
     }
+
+    public ProveedorEntity getProveedorByCodigo(String codigoProveedor) {
+        return proveedorRepository.findByCodigo(codigoProveedor);
+    }
+
 }

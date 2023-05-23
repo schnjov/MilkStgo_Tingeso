@@ -16,6 +16,16 @@ public class ProveedorEntity {
     private String categoria;
     private Boolean afectoARetencion;
 
+    public ProveedorEntity() {
+    }
+
+    public ProveedorEntity(String codigo, String nombre, String categoria, Boolean afectoARetencion) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.categoria = categoria;
+        this.afectoARetencion = afectoARetencion;
+    }
+
     public String getCodigo() {
         return codigo;
     }

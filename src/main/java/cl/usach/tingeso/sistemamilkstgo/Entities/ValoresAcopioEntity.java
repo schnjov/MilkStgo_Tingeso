@@ -7,7 +7,7 @@ public class ValoresAcopioEntity {
     @Id
     private String id;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "codigo_proveedor")
     private ProveedorEntity proveedor;
 

@@ -67,11 +67,22 @@
             </a>
         </div>
         <div class="col">
-            <a th:href="@{/}">
+            <a th:href="@{/planilla}">
                 <div class="card">
                     <div class="card-body card-height">
                         <h5 class="card-title">Generar pagos</h5>
                         <p class="card-text">Genera un reporte y planilla de pagos detallados para tus proveedores.</p>
+                        <i class="bi bi-table"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a th:href="@{planilla/pagos/formulario}">
+                <div class="card">
+                    <div class="card-body card-height">
+                        <h5 class="card-title">Ver Pagos</h5>
+                        <p class="card-text">Ver el ultimo reporte detallado por proveedor</p>
                         <i class="bi bi-table"></i>
                     </div>
                 </div>

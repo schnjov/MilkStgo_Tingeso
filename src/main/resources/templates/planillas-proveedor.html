@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="utf-8">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de Planilla de Pagos</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
+    <style>
+        .table-container {
+            overflow-x: auto;
+            padding-bottom: 200px !important;
+        }
+    </style>
+</head>
+<body>
+<!-- Encabezado -->
+<header class="bg-primary text-white py-3">
+    <div class="container">
+        <h1 class="mb-0">Milkstgo</h1>
+    </div>
+</header>
+<!-- Barra de navegación -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/}">Inicio</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" th:href="@{/planilla/pagos/formulario}">Consultar otro proveedor</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+<!-- Contenido principal -->
+<div class="container py-5 table-container">
+    <div class="row justify-content-center ">
+        <div class="col-md-8 ">
+            <div class="card border-0 shadow pb-3 table-container">
+                <div class="card-body">
+                    <h5 class="card-title text-center mb-4">Detalle de Planilla de Pagos</h5>
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th>Quincena:</th>
+                            <td th:text="${#dates.format(planilla.getQuincena().getFecha(),'yyyy/MM') + '/'
+                            + planilla.getQuincena().getQuincena()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Codigo proveedor: </th>
+                            <td th:text="${planilla.getQuincena().getProveedor().getCodigo()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Nombre proveedor: </th>
+                            <td th:text="${planilla.getQuincena().getProveedor().getNombre()}"></td>
+                        </tr>
+                        <tr>
+                            <th>TOTAL KLS leche: </th>
+                            <td th:text="${planilla.getQuincena().getKilos()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Días de Acopio Total:</th>
+                            <td th:text="${planilla.getDiasDeAcopioTotal()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Promedio Diario Kilos:</th>
+                            <td th:text="${planilla.getPromedioDiarioKilos()}"></td>
+                        </tr>
+                        <tr>
+                            <th>% Variación Leche:</th>
+                            <td th:text="${'%' + planilla.getPorcentajeVariacionLeche()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Grasa:</th>
+                            <td th:text="${'%' + planilla.getQuincena().getPorcentajeGrasa()}"></td>
+                        </tr>
+                        <tr>
+                            <th>% Variación Grasa:</th>
+                            <td th:text="${'%' + planilla.getPorcentajeVariacionGrasa()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Sólidos Totales:</th>
+                            <td th:text="${'%' + planilla.getQuincena().getPorcentajeSolidos()}"></td>
+                        </tr>
+                        <tr>
+                            <th>% Variación Sólidos:</th>
+                            <td th:text="${'%' + planilla.getPorcentajeVariacionSolidos()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Pago por Leche:</th>
+                            <td th:text="${'$' + planilla.getPagoPorLeche()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Pago por Grasa:</th>
+                            <td th:text="${'$' + planilla.getPagoPorGrasa()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Pago por Sólidos:</th>
+                            <td th:text="${'$' + planilla.getPagoPorSolidos()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Pago Total:</th>
+                            <td th:text="${'$' + planilla.getPagoTotal()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Bonificación por Frecuencia:</th>
+                            <td th:text="${'$' + planilla.getBonificacionPorFrecuencia()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Descuento por Variación Leche:</th>
+                            <td th:text="${'$' + planilla.getDescuentoPorVariacionLeche()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Descuento por Variación Grasa:</th>
+                            <td th:text="${'$' + planilla.getDescuentoPorVariacionGrasa()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Descuento por Variación Sólidos:</th>
+                            <td th:text="${'$' + planilla.getDescuentoPorVariacionSolidos()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Monto Retención:</th>
+                            <td th:text="${'$' + planilla.getMontoRetencion()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Monto Final:</th>
+                            <td th:text="${'$' + planilla.getMontoFinal()}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

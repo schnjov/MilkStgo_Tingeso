@@ -29,6 +29,10 @@ public class ValoresAcopioService {
     private ProveedorService proveedorService;
     private final Logger logger = Logger.getLogger(SistemaMilkStgoApplication.class.getName());
 
+    public ValoresAcopioEntity findByProveedor(ProveedorEntity proveedorEntity){
+        return valoresAcopioRepository.findByProveedor(proveedorEntity);
+    }
+
     public ResponseEntity<Void> saveExcel(MultipartFile file){
         try {
             Workbook workbook = new XSSFWorkbook(file.getInputStream());
