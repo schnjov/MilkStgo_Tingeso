@@ -3,60 +3,125 @@ package cl.usach.tingeso.sistemamilkstgo.Services;
 import cl.usach.tingeso.sistemamilkstgo.Entities.AcopioEntity;
 import cl.usach.tingeso.sistemamilkstgo.Entities.ProveedorEntity;
 import cl.usach.tingeso.sistemamilkstgo.Repositories.AcopioRepository;
-import cl.usach.tingeso.sistemamilkstgo.Services.AcopioService;
-import cl.usach.tingeso.sistemamilkstgo.Services.ProveedorService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
-@SpringBootTest
-public class AcopioServiceTest {
+class AcopioServiceTest {
+
     @Mock
     private AcopioRepository acopioRepository;
-    @Mock
-    private ProveedorService proveedorService;
 
     @InjectMocks
     private AcopioService acopioService;
 
     @BeforeEach
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    public void testGetAcopiosFromDateByProveedor() {
-        Date date = new Date(2023,Calendar.APRIL,30);
-        List<AcopioEntity> acopios = new ArrayList<>();
-        ProveedorEntity proveedor = new ProveedorEntity("00001", "culun", "A", true);
-        acopios.add(new AcopioEntity("1", new Date(2023, Calendar.JUNE, 1), 1, proveedor, 1000));
-        acopios.add(new AcopioEntity("2", new Date(2023, Calendar.JUNE, 1), 2, proveedor, 800));
-        acopios.add(new AcopioEntity("3", new Date(2023, Calendar.JUNE, 2), 1, proveedor, 1200));
-        acopios.add(new AcopioEntity("4", new Date(2023, Calendar.JUNE, 2), 2, proveedor, 1500));
-        acopios.add(new AcopioEntity("5", new Date(2023, Calendar.JUNE, 3), 1, proveedor, 700));
-        acopios.add(new AcopioEntity("6", new Date(2023, Calendar.JUNE, 3), 2, proveedor, 900));
-        Logger.getLogger("test").info(acopios.get(0).getFecha().toString());
-        when(acopioRepository.findByProveedorAndFechaGreaterThanEqual(proveedor,date)).thenReturn(acopios);
-        when(acopioRepository.findByFecha(acopios.get(0).getFecha())).thenReturn(acopios.subList(0, 2));
-        when(acopioRepository.findByFecha(acopios.get(2).getFecha())).thenReturn(acopios.subList(2, 4));
-        when(acopioRepository.findByFecha(acopios.get(4).getFecha())).thenReturn(acopios.subList(4, 6));
+    void findAll() {
+        // Arrange
+        List<AcopioEntity> acopioList = new ArrayList<>();
+        acopioList.add(new AcopioEntity());
+        when(acopioRepository.findAll()).thenReturn(acopioList);
 
+        // Act
+        List<AcopioEntity> result = acopioService.findAll();
+
+        // Assert
+        assertEquals(1, result.size());
+        verify(acopioRepository, times(1)).findAll();
+    }
+
+    @Test
+    void findByProveedor_WithDateNull() {
+        // Arrange
+        Date date = null;
+        ProveedorEntity proveedor = new ProveedorEntity();
+        List<AcopioEntity> acopioList = new ArrayList<>();
+        acopioList.add(new AcopioEntity());
+        when(acopioRepository.findByProveedor(proveedor)).thenReturn(acopioList);
+
+        // Act
+        List<AcopioEntity> result = acopioService.findByProveedor(date, proveedor);
+
+        // Assert
+        assertEquals(1, result.size());
+        verify(acopioRepository, times(1)).findByProveedor(proveedor);
+        verify(acopioRepository, never()).findByProveedorAndFechaGreaterThanEqual(proveedor, date);
+    }
+
+    @Test
+    void findByProveedor_WithDateNotNull() {
+        // Arrange
+        Date date = new Date();
+        ProveedorEntity proveedor = new ProveedorEntity();
+        List<AcopioEntity> acopioList = new ArrayList<>();
+        acopioList.add(new AcopioEntity());
+        when(acopioRepository.findByProveedorAndFechaGreaterThanEqual(proveedor, date)).thenReturn(acopioList);
+
+        // Act
+        List<AcopioEntity> result = acopioService.findByProveedor(date, proveedor);
+
+        // Assert
+        assertEquals(1, result.size());
+        verify(acopioRepository, never()).findByProveedor(proveedor);
+        verify(acopioRepository, times(1)).findByProveedorAndFechaGreaterThanEqual(proveedor, date);
+    }
+
+    @Test
+    void getAcopioTotal() {
+        // Arrange
+        Date date = new Date();
+        ProveedorEntity proveedor = new ProveedorEntity();
+        List<AcopioEntity> acopioList = new ArrayList<>();
+        acopioList.add(new AcopioEntity("1", date, 1, proveedor, 10)); // 10 kilos
+        acopioList.add(new AcopioEntity("2", date, 1, proveedor, 15)); // 15 kilos
+        when(acopioRepository.findByProveedorAndFechaGreaterThanEqual(proveedor,date)).thenReturn(acopioList);
+        // Act
+        Integer result = acopioService.getAcopioTotal(date, proveedor);
+
+        // Assert
+        assertEquals(25, result);
+    }
+
+    @Test
+    void getAcopiosFromDateByProveedor() {
+        // Arrange
+        Calendar calendar = Calendar.getInstance();
+        Date date = calendar.getTime();
+        ProveedorEntity proveedor = new ProveedorEntity();
+        List<AcopioEntity> acopioList = new ArrayList<>();
+        acopioList.add(new AcopioEntity("1", date, 1, proveedor, 10)); // M turno
+        acopioList.add(new AcopioEntity("2", date, 2, proveedor, 15)); // T turno
+        calendar.add(Calendar.DATE, 1); // Increment day by 1
+        Date date2 = calendar.getTime(); // Update the date object
+        acopioList.add(new AcopioEntity("3", date2, 1, proveedor, 20)); // M turno
+        when(acopioRepository.findByProveedorAndFechaGreaterThanEqual(proveedor, date)).thenReturn(acopioList);
+        when(acopioRepository.findByFecha(date)).thenReturn(acopioList.subList(0,2));
+        when(acopioRepository.findByFecha(date2)).thenReturn(acopioList.subList(2,3));
+
+        // Act
         List<Integer> result = acopioService.getAcopiosFromDateByProveedor(date, proveedor);
 
-        assertEquals(3, result.get(0));
-        assertEquals(0, result.get(1));
-        assertEquals(0, result.get(2));
+        // Assert
+        assertEquals(1, result.get(0)); // Total days
+        assertEquals(1, result.get(1)); // 1st shift count
+        assertEquals(0, result.get(2)); // 2nd shift count
+        verify(acopioRepository, times(1)).findByProveedorAndFechaGreaterThanEqual(proveedor, date);
+        verify(acopioRepository, times(1)).findByFecha(date);
     }
+
 }

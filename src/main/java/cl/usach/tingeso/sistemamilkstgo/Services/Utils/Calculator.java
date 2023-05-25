@@ -1,7 +1,6 @@
-package cl.usach.tingeso.sistemamilkstgo.Utils;
+package cl.usach.tingeso.sistemamilkstgo.Services.Utils;
 
-import cl.usach.tingeso.sistemamilkstgo.Utils.Statics.Data;
-import jakarta.persistence.criteria.CriteriaBuilder;
+import cl.usach.tingeso.sistemamilkstgo.Services.Utils.Statics.Data;
 import org.springframework.stereotype.Component;
 
 import java.util.logging.Logger;

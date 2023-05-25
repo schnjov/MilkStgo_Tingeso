@@ -4,6 +4,7 @@ import cl.usach.tingeso.sistemamilkstgo.Entities.ProveedorEntity;
 import cl.usach.tingeso.sistemamilkstgo.Entities.QuincenaEntity;
 import cl.usach.tingeso.sistemamilkstgo.Repositories.AcopioRepository;
 import cl.usach.tingeso.sistemamilkstgo.SistemaMilkStgoApplication;
+import lombok.Generated;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,21 +21,24 @@ import static java.lang.Integer.parseInt;
 @Service
 public class AcopioService {
 
-    @Autowired
-    private AcopioRepository acopioRepository;
+    private final AcopioRepository acopioRepository;
 
-    @Autowired
-    private ProveedorService proveedorService;
+    private final ProveedorService proveedorService;
+
 
     private final Logger logger = Logger.getLogger(SistemaMilkStgoApplication.class.getName());
 
+    @Autowired
     public AcopioService(AcopioRepository acopioRepository, ProveedorService proveedorService) {
+        this.acopioRepository = acopioRepository;
+        this.proveedorService = proveedorService;
     }
 
     public List<AcopioEntity> findAll() {
         return acopioRepository.findAll();
     }
 
+    @Generated
     public ResponseEntity<Void> saveExcel(MultipartFile file){
         try {
             Workbook workbook = new XSSFWorkbook(file.getInputStream());
@@ -47,6 +51,7 @@ public class AcopioService {
             return ResponseEntity.status(400).build();
         }
     }
+    @Generated
     public List<AcopioEntity> excelToList(Sheet sheet){
         List<AcopioEntity> acopios = new ArrayList<>();
         int counter = 0;
@@ -104,7 +109,6 @@ public class AcopioService {
 
     public List<Integer> getAcopiosFromDateByProveedor(Date date, ProveedorEntity proveedor) {
         List<AcopioEntity> acopios = findByProveedor(date, proveedor);
-        logger.info("Acopios: " + acopios.size());
         List<Integer> dias = new ArrayList<>(3);
         Set<Date> unique = new HashSet<>();
         //Iniciar en 0 los días

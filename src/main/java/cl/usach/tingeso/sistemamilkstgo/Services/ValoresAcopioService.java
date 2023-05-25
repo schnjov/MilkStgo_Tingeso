@@ -4,6 +4,7 @@ import cl.usach.tingeso.sistemamilkstgo.Entities.ProveedorEntity;
 import cl.usach.tingeso.sistemamilkstgo.Entities.ValoresAcopioEntity;
 import cl.usach.tingeso.sistemamilkstgo.Repositories.ValoresAcopioRepository;
 import cl.usach.tingeso.sistemamilkstgo.SistemaMilkStgoApplication;
+import lombok.Generated;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -29,10 +30,12 @@ public class ValoresAcopioService {
     private ProveedorService proveedorService;
     private final Logger logger = Logger.getLogger(SistemaMilkStgoApplication.class.getName());
 
+    @Generated
     public ValoresAcopioEntity findByProveedor(ProveedorEntity proveedorEntity){
         return valoresAcopioRepository.findByProveedor(proveedorEntity);
     }
 
+    @Generated
     public ResponseEntity<Void> saveExcel(MultipartFile file){
         try {
             Workbook workbook = new XSSFWorkbook(file.getInputStream());
@@ -45,6 +48,7 @@ public class ValoresAcopioService {
             return ResponseEntity.status(400).build();
         }
     }
+    @Generated
     public List<ValoresAcopioEntity> excelToList(Sheet sheet){
         List<ValoresAcopioEntity> valoresAcopioEntityList = new ArrayList<>();
         int counter = 0;

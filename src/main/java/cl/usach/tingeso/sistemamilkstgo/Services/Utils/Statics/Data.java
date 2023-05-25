@@ -1,4 +1,4 @@
-package cl.usach.tingeso.sistemamilkstgo.Utils.Statics;
+package cl.usach.tingeso.sistemamilkstgo.Services.Utils.Statics;
 
 import java.util.ArrayList;
 

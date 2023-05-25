@@ -1,4 +1,4 @@
-version: "3.0"
+version: "3.8"
 services:
   postgres-db:
     image: postgres:latest
@@ -17,11 +17,11 @@ services:
     ports:
       - "8090:8090"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://tingeso2023:5432/postgres?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/tingeso2023?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=password
     deploy:
       restart_policy:
-        condition: on-failure
+        condition: none
     depends_on:
       - postgres-db

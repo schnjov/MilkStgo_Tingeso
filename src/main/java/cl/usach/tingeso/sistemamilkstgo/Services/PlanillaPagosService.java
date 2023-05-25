@@ -3,7 +3,7 @@ package cl.usach.tingeso.sistemamilkstgo.Services;
 import cl.usach.tingeso.sistemamilkstgo.Entities.PlanillaPagosEntity;
 import cl.usach.tingeso.sistemamilkstgo.Entities.ProveedorEntity;
 import cl.usach.tingeso.sistemamilkstgo.Entities.QuincenaEntity;
-import cl.usach.tingeso.sistemamilkstgo.Utils.Calculator;
+import cl.usach.tingeso.sistemamilkstgo.Services.Utils.Calculator;
 import cl.usach.tingeso.sistemamilkstgo.Repositories.PlanillaPagosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +28,6 @@ public class PlanillaPagosService {
     private static final Logger LOGGER = Logger.getLogger(PlanillaPagosService.class.getName());
 
     public PlanillaPagosEntity crearPlanilla(QuincenaEntity quincena) {
-        LOGGER.info(quincena.toString());
         PlanillaPagosEntity planillaPagos = new PlanillaPagosEntity();
         planillaPagos.setQuincena(quincena);
         planillaPagos.setDiasDeAcopioTotal(quincena.getDiasDeAcopioM()+quincena.getDiasDeAcopioT()+

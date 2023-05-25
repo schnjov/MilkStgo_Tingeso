@@ -24,15 +24,15 @@ public class QuincenaService {
     @Autowired
     private AcopioService acopioService;
 
-    @Autowired
-    private ProveedorService proveedorService;
-
     private final static Logger LOGGER = org.slf4j.LoggerFactory.getLogger(QuincenaService.class);
 
     //Verificar si hay quincenas registradas para el proveedor
     public boolean verificarQuincena(ProveedorEntity proveedor) {
         List<QuincenaEntity> quincena = quincenaRepository.findQuincenaEntityByProveedor(proveedor);
-        return quincena.size() != 0;
+        if (quincena == null)
+            return false;
+        else
+            return quincena.size() != 0;
     }
 
     //Obtener quincena anterior

@@ -11,8 +11,13 @@ import java.util.List;
 
 @Service
 public class ProveedorService {
+
+    private final ProveedorRepository proveedorRepository;
+
     @Autowired
-    private ProveedorRepository proveedorRepository;
+    public ProveedorService(ProveedorRepository proveedorRepository){
+        this.proveedorRepository = proveedorRepository;
+    }
 
     public List<ProveedorEntity> findAll() {
         return proveedorRepository.findAll();
