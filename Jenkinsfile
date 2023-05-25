@@ -2,6 +2,7 @@ pipeline{
     agent any
     tools{
         maven "maven"
+        git "Git"
     }
     stages{
         stage("Build JAR File"){
